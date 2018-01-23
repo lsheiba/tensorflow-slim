@@ -25,10 +25,10 @@
 set -e
 
 # Where the checkpoint and logs will be saved to.
-TRAIN_DIR=/tmp/lenet-model
+TRAIN_DIR=/notebooks/training/lenet-model
 
 # Where the dataset is saved to.
-DATASET_DIR=/tmp/mnist
+DATASET_DIR=/notebooks/data/mnist
 
 # Download the dataset
 python download_and_convert_data.py \
