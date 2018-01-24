@@ -48,10 +48,10 @@ fi
 if [ ! -f ${PRETRAINED_CHECKPOINT_DIR}/inception_v3.ckpt ]; then
   curl -H “Authorization: Bearer ${MY_TOKEN}” \
     https://dev.kuberlab.io/api/v0.2/workspace/${MY_WORKSPACE}/mlmodels/${MY_MODEL}/versions/${MY_MODEL_VERSION}/download \
-    > inception.tgz
-  tar -xvzf inception.tar.gz
-  mv inception_v3.ckpt ${PRETRAINED_CHECKPOINT_DIR}/inception_v3.ckpt
-  rm inception_v3.tar.gz
+    > ${MY_MODEL}.tgz
+  tar -xvzf ${MY_MODEL}.tgz
+  mv ${MY_MODEL}.ckpt ${PRETRAINED_CHECKPOINT_DIR}/${MY_MODEL}.ckpt
+  rm ${MY_MODEL}.tgz
 fi
 #if [ ! -f ${PRETRAINED_CHECKPOINT_DIR}/inception_v3.ckpt ]; then
 #  wget http://download.tensorflow.org/models/inception_v3_2016_08_28.tar.gz
