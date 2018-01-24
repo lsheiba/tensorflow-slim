@@ -25,16 +25,16 @@
 set -e
 
 # Where the pre-trained Inception Resnet V2 checkpoint is saved to.
-PRETRAINED_CHECKPOINT_DIR=/tmp/checkpoints
+PRETRAINED_CHECKPOINT_DIR=/notebookstraining/checkpoints
 
 # Where the pre-trained Inception Resnet V2 checkpoint is saved to.
 MODEL_NAME=inception_resnet_v2
 
 # Where the training (fine-tuned) checkpoint and logs will be saved to.
-TRAIN_DIR=/tmp/flowers-models/${MODEL_NAME}
+TRAIN_DIR=/notebooks/training/flowers-models/${MODEL_NAME}
 
 # Where the dataset is saved to.
-DATASET_DIR=/tmp/flowers
+DATASET_DIR=/notebooks/data/flowers
 
 # Download the pre-trained checkpoint.
 if [ ! -d "$PRETRAINED_CHECKPOINT_DIR" ]; then
