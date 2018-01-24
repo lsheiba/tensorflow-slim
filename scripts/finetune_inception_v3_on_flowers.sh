@@ -33,16 +33,32 @@ TRAIN_DIR=/notebooks/training/flowers-models/inception_v3
 # Where the dataset is saved to.
 DATASET_DIR=/notebooks/data/flowers
 
+MY_WORKSPACE=test-projects
+MY_TOKEN=ce2135f0-9edd-4666-a8b2-56378b8165d2
+MY_MODEL=inception_v3
+MY_MODEL_VERSION=1.0.0
+
+#curl -H “Authorization: Bearer ${MY_TOKEN}” \
+#  https://dev.kuberlab.io/api/v0.2/workspace/${MY_WORKSPACE}/mlmodels/${MY_MODEL}/versions/${MY_MODEL_VERSION}/download
+
 # Download the pre-trained checkpoint.
 if [ ! -d "$PRETRAINED_CHECKPOINT_DIR" ]; then
   mkdir ${PRETRAINED_CHECKPOINT_DIR}
 fi
 if [ ! -f ${PRETRAINED_CHECKPOINT_DIR}/inception_v3.ckpt ]; then
-  wget http://download.tensorflow.org/models/inception_v3_2016_08_28.tar.gz
-  tar -xvf inception_v3_2016_08_28.tar.gz
+  curl -H “Authorization: Bearer ${MY_TOKEN}” \
+    https://dev.kuberlab.io/api/v0.2/workspace/${MY_WORKSPACE}/mlmodels/${MY_MODEL}/versions/${MY_MODEL_VERSION}/download \
+    > inception.tgz
+  tar -xvzf inception.tar.gz
   mv inception_v3.ckpt ${PRETRAINED_CHECKPOINT_DIR}/inception_v3.ckpt
-  rm inception_v3_2016_08_28.tar.gz
+  rm inception_v3.tar.gz
 fi
+#if [ ! -f ${PRETRAINED_CHECKPOINT_DIR}/inception_v3.ckpt ]; then
+#  wget http://download.tensorflow.org/models/inception_v3_2016_08_28.tar.gz
+#  tar -xvf inception_v3_2016_08_28.tar.gz
+#  mv inception_v3.ckpt ${PRETRAINED_CHECKPOINT_DIR}/inception_v3.ckpt
+#  rm inception_v3_2016_08_28.tar.gz
+#fi
 
 # Download the dataset
 python download_and_convert_data.py \
